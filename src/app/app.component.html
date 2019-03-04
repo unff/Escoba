@@ -14,12 +14,25 @@
     </clr-header>
     <div class="content-container">
       <main class="content-area">
-        <div class="row">
-            <div class="col-md-4">
+        <div class="clr-row">
+            <div class="clr-col-4">
+                This is some text to see how wide this thing gets.  It's hard to tell how wide something will be or if it renders like you expect it to sometimes.
                 <!-- this will be ngFor (account of accounts) -->
+                <ul>
+                    <li *ngFor="let account of db.accounts">{{account.name}}</li>
+                </ul>
             </div>
-            <div class="com-md-8">
+            <div class="clr-col-8">
+                    This is some text to see how wide this thing gets.  It's hard to tell how wide something will be or if it renders like you expect it to sometimes.
                 <!-- this will be ngFor (event of events) -->
+                <ul>
+                    <li *ngFor="let account of db.accounts">{{account.name}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="clr-row">
+            <div class="clr-col-4">
+
             </div>
         </div>
       </main>

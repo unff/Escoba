@@ -1,11 +1,21 @@
 import { IAccount } from '../interfaces/account'
 
 export class Account implements IAccount {
+    // PROPERTIES
+    private _key: string
     private _Name: string
     private _Balance: number
     private _Icon: string
     private _SiteUrl: string
     private _Color: string
+
+    // PROPERTY GETTERS ANS SETTERS
+    public get key() {
+        return this._key
+    }
+    public set key(a: string) {
+        this._key = a
+    }
 
     public get name() {
         return this._Name
@@ -42,7 +52,8 @@ export class Account implements IAccount {
         this._Color = a
     }
 
-    constructor(name: string, balance: number, icon: string, siteUrl: string, color: string) {
+    constructor(key: string, name: string, balance: number, icon: string, siteUrl: string, color: string) {
+        this._key = key
         this._Name = name
         this._Balance = balance
         this._Icon = icon
