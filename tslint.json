@@ -9,6 +9,7 @@
     "deprecation": {
       "severity": "warn"
     },
+    "semicolon": [true, "never"],
     "import-blacklist": [
       true,
       "rxjs/Rx"
@@ -44,6 +45,13 @@
     "no-inferrable-types": [
       true,
       "ignore-params"
+    ],
+    "variable-name": [
+      true, 
+      "ban-keywords", 
+      "check-format", 
+      "allow-leading-underscore",
+      "allow-trailing-underscore"
     ],
     "no-non-null-assertion": true,
     "no-redundant-jsdoc": true,
