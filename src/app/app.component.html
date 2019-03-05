@@ -19,14 +19,14 @@
                 This is some text to see how wide this thing gets.  It's hard to tell how wide something will be or if it renders like you expect it to sometimes.
                 <!-- this will be ngFor (account of accounts) -->
                 <ul>
-                    <li *ngFor="let account of db.accounts">{{account.name}}</li>
+                    <esb-account *ngFor="let #account of db.accounts"></esb-account>
                 </ul>
             </div>
             <div class="clr-col-8">
                     This is some text to see how wide this thing gets.  It's hard to tell how wide something will be or if it renders like you expect it to sometimes.
                 <!-- this will be ngFor (event of events) -->
                 <ul>
-                    <li *ngFor="let account of db.accounts">{{account.name}}</li>
+                    <esb-event *ngFor="let #event of db.events"></esb-event>
                 </ul>
             </div>
         </div>

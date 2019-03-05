@@ -1,3 +1,16 @@
-<p>
-  account works!
-</p>
+<div class="acct-container">
+  <div class="clr-row">
+    <div class="clr-col-3">
+      <!-- icon side-->
+      <div class="acct-icon-holder">
+        <img [src]="account.icon" class="acct-icon">
+      </div>
+    </div>
+    <div class="clr-col-9">
+      <!-- details side-->
+      <div class="clr-row acct-title">{{account.name}}</div>
+      <div class="clr-row acct-balance">{{acccount.balance}}</div>
+      <div class="clr-row acct-site">{{account.siteUrl}}</div>
+    </div>
+  </div>
+</div>   

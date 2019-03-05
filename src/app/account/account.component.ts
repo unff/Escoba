@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Input } from '@angular/core'
+import { Account } from '../classes/account'
 
 @Component({
   selector: 'esb-account',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
+  @Input() account: Account
 
   constructor() { }
 

@@ -37,7 +37,7 @@ export class GunService implements OnDestroy {
     })
     this._events = this.gun.get('events')
     this._events.map().on((data: any, key: any) => {
-      if (this._events.find((e: any) => e.key === key) === undefined){
+      if (this._events.find((e: any) => e.key === key) === undefined) {
         const event: Event = new Event(
           data.key,
           data.type,
