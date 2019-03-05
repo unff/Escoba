@@ -16,23 +16,64 @@
       <main class="content-area">
         <div class="clr-row">
             <div class="clr-col-4">
-                This is some text to see how wide this thing gets.  It's hard to tell how wide something will be or if it renders like you expect it to sometimes.
-                <!-- this will be ngFor (account of accounts) -->
-                <ul>
-                    <esb-account *ngFor="let #account of db.accounts"></esb-account>
-                </ul>
+                <div class="">
+                    This is some text to see how wide this thing gets.  It's hard to tell how wide something will be or if it renders like you expect it to sometimes.
+                    <!-- this will be ngFor (account of accounts) -->
+                    <ul>
+                        <esb-account *ngFor="let account of db.accounts" [account]="account" id="{{account.key}}"></esb-account>
+                    </ul>
+                </div>
+
             </div>
             <div class="clr-col-8">
                     This is some text to see how wide this thing gets.  It's hard to tell how wide something will be or if it renders like you expect it to sometimes.
-                <!-- this will be ngFor (event of events) -->
+                <!-- this will be ngFor (event of events)
                 <ul>
-                    <esb-event *ngFor="let #event of db.events"></esb-event>
+                    <esb-event *ngFor="let event of db.events" [event]="event" id="{{event.key}}"></esb-event>
                 </ul>
+                -->
             </div>
         </div>
         <div class="clr-row">
             <div class="clr-col-4">
+                <div class="bottomForm">
+                    <form clrForm [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+                        <clr-input-container>
+                            <label for="name">Name</label>
+                            <input clrInput type="text" formControlName="name" id="name" name="name">
+                            <clr-control-helper>The name of the account</clr-control-helper>
+                            <clr-control-error></clr-control-error>
+                        </clr-input-container>
+                        <clr-input-container>
+                            <label for="balance">Balance</label>
+                            <input clrInput type="text" formControlName="balance" id="balance" name="balance">
+                            <clr-control-helper>The account balance</clr-control-helper>
+                            <clr-control-error></clr-control-error>
+                        </clr-input-container>
+                        <clr-input-container>
+                            <label for="icon">Icon</label>
+                            <input clrInput type="text" formControlName="icon" id="icon" name="icon">
+                            <clr-control-helper>URL to an icon to use for this account</clr-control-helper>
+                            <clr-control-error></clr-control-error>
+                        </clr-input-container>
+                        <clr-input-container>
+                            <label for="siteUrl">Site URL</label>
+                            <input clrInput type="text" formControlName="siteUrl" id="siteUrl" name="siteUrl">
+                            <clr-control-helper>URL to the website for the account</clr-control-helper>
+                            <clr-control-error></clr-control-error>
+                        </clr-input-container>
+                        <clr-input-container>
+                            <label for="color">Color</label>
+                            <input clrInput type="text" formControlName="color" id="color" name="color">
+                            <clr-control-helper>HEX value for the background color of the control</clr-control-helper>
+                            <clr-control-error></clr-control-error>
+                        </clr-input-container>
+                        <br />
+                        <button type="submit" [disabled]="accountForm.pristine">Save</button>
+                        <button type="reset" (click)="revert()">Reset</button>
 
+                    </form>
+                </div>
             </div>
         </div>
       </main>

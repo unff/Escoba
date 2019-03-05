@@ -7,5 +7,14 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - [x] rough out new account UI component
 - [ ] rough out new event UI component
 - [ ] pass object to each
-- [ ] classes are called 'event', but component is all 'entry'. Change 'entry' to 'event'
-- [ ] 
+- [x] classes are called 'event', but component is all 'entry'. Change 'entry' to 'event'
+- [x] Add reactive form for accounts to show at the bottom of the left column
+- [ ] Add temporary reactive form for events to show at the bottom of the right column (debug only)
+- [ ] flag event form as debug with ngIf?
+- [ ] Wire accounts form into gun()
+- [ ] Wire accounts formGroupModel into the actual account model in a submit function
+
+
+Click on an account, appComponent should get the key of the selected account and populate selectedAccount with the object from the accoutns array.
+account deselected should point selectedAccount to an empty Account object so that no data shows in the form until entered.
+Add account / Modify account should push new or update existing
