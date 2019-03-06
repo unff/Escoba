@@ -37,7 +37,7 @@
         <div class="clr-row">
             <div class="clr-col-4">
                 <div class="bottomForm">
-                    <form clrForm [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+                    <form clrForm clrLayout="horizontal" [formGroup]="accountForm" (ngSubmit)="onSubmit()">
                         <clr-input-container>
                             <label for="name">Name</label>
                             <input clrInput type="text" formControlName="name" id="name" name="name">

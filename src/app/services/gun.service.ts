@@ -17,11 +17,13 @@ export class GunService implements OnDestroy {
   private _events: any
 
   constructor() {
+    this.accounts = []
+    this.events = []
     // start listening to the accounts and events feeds from gunDB.
     this._accounts = this.gun.get('accounts')
     this._accounts.map().on((data: any, key: any) => {
       // see if key exists in accounts[] array
-      if (this._accounts.find((e: any) => e.key === key) === undefined) {
+      if (this.accounts.find((e: any) => e.key === key) === undefined) {
         // no account found, create a new one and add it to the array
         const account: Account = new Account(
           data.key,
@@ -31,19 +33,19 @@ export class GunService implements OnDestroy {
           data.siteUrl,
           data.color
         )
-        this._accounts.push(account)
+        this.accounts.push(account)
         console.log('account added: ', data.name, key)
       }
     })
     this._events = this.gun.get('events')
     this._events.map().on((data: any, key: any) => {
-      if (this._events.find((e: any) => e.key === key) === undefined) {
+      if (this.events.find((e: any) => e.key === key) === undefined) {
         const event: Event = new Event(
           data.key,
           data.type,
           data.note
         )
-        this._events.push(event)
+        this.events.push(event)
         console.log('event added: ', data, key)
       }
     })

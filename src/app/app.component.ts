@@ -41,7 +41,8 @@ export class AppComponent {
 
   onSubmit() {
     // move the formModel over to the data model
-    // this.addAccount(dataModel)
+    const result: Account = Object.assign({}, this.accountForm.value)
+    this.addAcccount(result)
   }
 
   addAcccount(a: Account) {
