@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { GunService } from './services/gun.service'
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms'
+import { Account } from './classes/account'
 
 @Component({
   selector: 'esb-root',
@@ -36,5 +37,14 @@ export class AppComponent {
 
   revert() {
     this.accountForm.reset()
+  }
+
+  onSubmit() {
+    // move the formModel over to the data model
+    // this.addAccount(dataModel)
+  }
+
+  addAcccount(a: Account) {
+    this.db.addAccount(a)
   }
 }
