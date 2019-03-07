@@ -1,16 +1,39 @@
-<div class="acct-container">
-  <div class="clr-row">
-    <div class="clr-col-3">
-      <!-- icon side-->
-      <div class="acct-icon-holder">
-        <img [src]="account.icon" class="acct-icon">
+  <div class="card">
+    <div class="card-header">
+      <div class="clr-row">
+        <div class="clr-col-11">
+          {{account.name}}
+        </div>
+        <div class="clr-col-1">
+          <a (onClick)="deleteAccount()">&times;</a>
+        </div>
       </div>
     </div>
-    <div class="clr-col-9">
-      <!-- details side-->
-      <div class="clr-row acct-title">{{account.name}}</div>
-      <div class="clr-row acct-balance">{{account.balance}}</div>
-      <div class="clr-row acct-site">{{account.siteUrl}}</div>
+    <div class="card-block">
+      <div class="card-media-block wrap">
+        <div class="clr-row">
+          <div class="clr-col-4">
+            <img [src]="account.icon" class="card-media-image">
+          </div>
+          <div class="clr-col-8">
+            Bal: {{account.balance | currency:'USD'}}
+          </div>
+        <!-- <div class="card-media-description">
+          <span class="card-media-title">
+            {{account.balance}}
+          </span>
+          <span class="card-media-text">
+            account text placeholder
+          </span> 
+        </div> -->
+      </div>
+      <!-- <div class="card-text">
+        ...
+      </div> -->
+    </div>
+    <div class="card-footer">
+      <a href="//{{account.siteUrl}}">
+        <button class="btn btn-sm btn-link">{{account.siteUrl}}</button>
+      </a>
     </div>
   </div>
-</div>   
