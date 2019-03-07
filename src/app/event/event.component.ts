@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core'
-import { Event } from '../classes/event';
+import { Event } from '../classes/event'
 
 @Component({
   selector: 'esb-event',

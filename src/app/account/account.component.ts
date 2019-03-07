@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, Input, Output, EventEmitter } from '@angular/core'
 import { Account } from '../classes/account'
 
 @Component({
@@ -6,12 +6,15 @@ import { Account } from '../classes/account'
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
-export class AccountComponent implements OnInit {
+export class AccountComponent {
   @Input() account: Account
+  @Output() delete = new EventEmitter<Account>()
 
   constructor() { }
 
-  ngOnInit() {
+  deleteAccount() {
+      console.log('account component delete hit')
+      this.delete.emit(this.account)
   }
 
 }

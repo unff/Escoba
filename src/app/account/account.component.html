@@ -1,11 +1,11 @@
   <div class="card">
     <div class="card-header">
       <div class="clr-row">
-        <div class="clr-col-11">
+        <div class="clr-col-12">
           {{account.name}}
-        </div>
-        <div class="clr-col-1">
-          <a (onClick)="deleteAccount()">&times;</a>
+          <span style="display:block; float: right;">
+            <a (click)="deleteAccount()">&times;</a>
+          </span>
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
           </span>
           <span class="card-media-text">
             account text placeholder
-          </span> 
+          </span>
         </div> -->
       </div>
       <!-- <div class="card-text">

@@ -48,4 +48,8 @@ export class AppComponent {
   addAcccount(a: Account) {
     this.db.addAccount(a)
   }
+
+  deleteAccount(a: Account) {
+    this.db.deleteAccount(a)
+  }
 }

@@ -8,7 +8,7 @@ import { Event } from '../classes/event'
 })
 export class GunService implements OnDestroy {
 
-  readonly gun = Gun()
+  readonly gun = Gun('http://localhost:8765/gun')
 
   public accounts: Account[]
   public events: Event[]
@@ -17,16 +17,28 @@ export class GunService implements OnDestroy {
   private _events: any
 
   constructor() {
-    this.accounts = []
-    this.events = []
+
     // start listening to the accounts and events feeds from gunDB.
     this._accounts = this.gun.get('accounts')
+    this._accounts.on((v,o) => {
+      console.info('accounts.on() fired')
+      this.loadAccounts()
+    })
+    // this.loadAccounts()
+
+    this._events = this.gun.get('events')
+    this.loadEvents()
+  }
+
+  loadAccounts() {
+    this.accounts = []
     this._accounts.map().on((data: any, key: any) => {
-      // see if key exists in accounts[] array
-      if (this.accounts.find((e: any) => e.key === key) === undefined) {
+      console.info('account.on() fired for ', key)
+      // see if key exists in accounts[] array, ignore null (deleted) nodes
+      if (data !== null && this.accounts.find((e: any) => e.key === key) === undefined) {
         // no account found, create a new one and add it to the array
         const account: Account = new Account(
-          data.key,
+          key,
           data.name,
           data.balance,
           data.icon,
@@ -34,26 +46,18 @@ export class GunService implements OnDestroy {
           data.color
         )
         this.accounts.push(account)
-        console.log('account added: ', data.name, key)
-      }
-    })
-    this._events = this.gun.get('events')
-    this._events.map().on((data: any, key: any) => {
-      if (this.events.find((e: any) => e.key === key) === undefined) {
-        const event: Event = new Event(
-          data.key,
-          data.type,
-          data.note
-        )
-        this.events.push(event)
-        console.log('event added: ', data, key)
+        console.log('account added: ', account, key)
       }
     })
   }
 
+  loadEvents() {
+    // event loader goes here
+  }
+
   ngOnDestroy() {
-      this._accounts.off()
-      this._events.off()
+    this._accounts.off()
+    this._events.off()
   }
 
   addEvent(evt: Event) {
@@ -64,5 +68,15 @@ export class GunService implements OnDestroy {
     this.gun.get('accounts').set(acct)
   }
 
-// end of class GunService
+  deleteEvent(evt: Event) {
+
+  }
+
+  deleteAccount(acct: Account) {
+    this._accounts.get(acct.key).put(null) // no idea if this is correct or will even work.
+    // remove this account from the accounts array as well, as on() wont pick up the changes
+    this.accounts = this.accounts.filter(value => value.key !== acct.key)
+  }
+
+  // end of class GunService
 }

@@ -20,7 +20,7 @@
                     This is some text to see how wide this thing gets.  It's hard to tell how wide something will be or if it renders like you expect it to sometimes.
                     <!-- this will be ngFor (account of accounts) -->
                     <ul>
-                        <esb-account *ngFor="let account of db.accounts" [account]="account" id="{{account.key}}"></esb-account>
+                        <esb-account *ngFor="let account of db.accounts" [account]="account" (delete)="deleteAccount($event)"></esb-account>
                     </ul>
                 </div>
 

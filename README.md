@@ -12,8 +12,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - [ ] Add temporary reactive form for events to show at the bottom of the right column
 - [x] Wire accounts form data into gun()
 - [x] Wire accounts formGroupModel into the actual account model in a submit function
-- [ ] find a way to delete an account - this is going to have to hook into passing an object around.
-- [ ] figure out ID so you can manage these stupid objects
+- [x] find a way to delete an account - this is going to have to hook into passing an object around.
+- [x] figure out ID so you can manage these stupid objects
+- [ ] clicking on an account populates the account form
 
 # Box o' UX stuff
 
