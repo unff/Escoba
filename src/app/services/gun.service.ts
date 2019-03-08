@@ -29,7 +29,7 @@ export class GunService implements OnDestroy {
       this.loadAccounts()
     })
     this._transactions = this.gun.get('transactions')
-    this._transactions.on((v,o) => {
+    this._transactions.on((v, o) => {
       this.loadTransactions()
     })
 
