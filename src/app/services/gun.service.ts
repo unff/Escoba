@@ -2,6 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core'
 import Gun from 'gun/gun'
 import { Account } from '../classes/account'
 import { Event } from '../classes/event'
+import { Transaction } from '../classes/transaction'
 
 @Injectable({
   providedIn: 'root'
@@ -12,19 +13,25 @@ export class GunService implements OnDestroy {
 
   public accounts: Account[]
   public events: Event[]
+  public transactions: Transaction[]
 
   private _accounts: any
   private _events: any
+  private _transactions: any
 
   constructor() {
 
     // start listening to the accounts and events feeds from gunDB.
     this._accounts = this.gun.get('accounts')
+    // when the accounts observable changes, just re-process the set (not great, but works)
     this._accounts.on((v, o) => {
       console.info('accounts.on() fired')
       this.loadAccounts()
     })
-    // this.loadAccounts()
+    this._transactions = this.gun.get('transactions')
+    this._transactions.on((v,o) => {
+      this.loadTransactions()
+    })
 
     this._events = this.gun.get('events')
     this.loadEvents()
@@ -47,6 +54,21 @@ export class GunService implements OnDestroy {
         )
         this.accounts.push(account)
         console.log('account added: ', account, key)
+      }
+    })
+  }
+
+  loadTransactions() {
+    this.transactions = []
+    this._transactions.map().on((data: any, key: any) => {
+      if (data !== null && this.transactions.find((t: any) => t.key === key) === undefined) {
+        const transaction: Transaction = new Transaction(
+          key,
+          data.type,
+          data.date,
+          data.note
+        )
+        this.transactions.push(transaction)
       }
     })
   }
