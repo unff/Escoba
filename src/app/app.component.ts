@@ -13,18 +13,21 @@ export class AppComponent {
   type = ['']
   accountForm: FormGroup
   eventForm: FormGroup
+  accountHolder: Account
   constructor(public db: GunService) {
     this.accountForm = this.createAccountFormGroup()
+    this.accountHolder = new Account('', '', 0, '', '', '')
     // this.eventForm = this.createEventFormGroup()
   }
 
   createAccountFormGroup() {
       return new FormGroup({
-          name: new FormControl(''),
-          balance: new FormControl(''),
-          icon: new FormControl(''),
-          siteUrl: new FormControl(''),
-          color: new FormControl(''),
+          key: new FormControl(),
+          name: new FormControl(),
+          balance: new FormControl(),
+          icon: new FormControl(),
+          siteUrl: new FormControl(),
+          color: new FormControl(),
       })
   }
 
@@ -42,7 +45,11 @@ export class AppComponent {
   onSubmit() {
     // move the formModel over to the data model
     const result: Account = Object.assign({}, this.accountForm.value)
-    this.addAcccount(result)
+    if (!result.key) {
+      this.addAcccount(result)
+    } else {
+      this.updateAccount(result)
+    }
   }
 
   addAcccount(a: Account) {
@@ -51,5 +58,25 @@ export class AppComponent {
 
   deleteAccount(a: Account) {
     this.db.deleteAccount(a)
+  }
+
+  updateAccount(a: Account) {
+    this.db.updateAccount(a)
+  }
+
+  selected(a: Account) {
+    console.log('selected', a)
+    console.log('accountForm: ', this.accountForm)
+    this.accountHolder = a
+    this.accountForm.reset()
+    this.accountForm.setValue({
+      key: this.accountHolder.key,
+      name: this.accountHolder.name,
+      balance: this.accountHolder.balance,
+      icon: this.accountHolder.icon,
+      siteUrl: this.accountHolder.siteUrl,
+      color: this.accountHolder.color
+    })
+    this.accountForm.markAsDirty()
   }
 }

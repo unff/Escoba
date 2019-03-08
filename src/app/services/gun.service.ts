@@ -20,7 +20,7 @@ export class GunService implements OnDestroy {
 
     // start listening to the accounts and events feeds from gunDB.
     this._accounts = this.gun.get('accounts')
-    this._accounts.on((v,o) => {
+    this._accounts.on((v, o) => {
       console.info('accounts.on() fired')
       this.loadAccounts()
     })
@@ -75,7 +75,12 @@ export class GunService implements OnDestroy {
   deleteAccount(acct: Account) {
     this._accounts.get(acct.key).put(null) // no idea if this is correct or will even work.
     // remove this account from the accounts array as well, as on() wont pick up the changes
-    this.accounts = this.accounts.filter(value => value.key !== acct.key)
+    // this.accounts = this.accounts.filter(value => value.key !== acct.key)
+  }
+
+  updateAccount(acct: Account) {
+    this._accounts.get(acct.key).put(acct)
+    // update the account in the array.
   }
 
   // end of class GunService

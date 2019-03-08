@@ -9,7 +9,7 @@ export class Account implements IAccount {
     private _SiteUrl: string
     private _Color: string
 
-    // PROPERTY GETTERS ANS SETTERS
+    // PROPERTY GETTERS AND SETTERS
     public get key() {
         return this._key
     }

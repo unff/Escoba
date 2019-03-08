@@ -20,7 +20,7 @@
                     This is some text to see how wide this thing gets.  It's hard to tell how wide something will be or if it renders like you expect it to sometimes.
                     <!-- this will be ngFor (account of accounts) -->
                     <ul>
-                        <esb-account *ngFor="let account of db.accounts" [account]="account" (delete)="deleteAccount($event)"></esb-account>
+                        <esb-account *ngFor="let account of db.accounts" [account]="account" (selectedAccount)="selected($event)" (delete)="deleteAccount($event)"></esb-account>
                     </ul>
                 </div>
 
@@ -38,38 +38,39 @@
             <div class="clr-col-4">
                 <div class="bottomForm">
                     <form clrForm clrLayout="horizontal" [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+                        <input type="hidden" formControlName="key" name="key" [value]="accountHolder.key">
                         <clr-input-container>
                             <label for="name">Name</label>
-                            <input clrInput type="text" formControlName="name" id="name" name="name">
+                            <input clrInput type="text" formControlName="name" id="name" name="name" [value]="accountHolder.name">
                             <clr-control-helper>The name of the account</clr-control-helper>
                             <clr-control-error></clr-control-error>
                         </clr-input-container>
                         <clr-input-container>
                             <label for="balance">Balance</label>
-                            <input clrInput type="text" formControlName="balance" id="balance" name="balance">
+                            <input clrInput type="text" formControlName="balance" id="balance" name="balance" [value]="accountHolder.balance">
                             <clr-control-helper>The account balance</clr-control-helper>
                             <clr-control-error></clr-control-error>
                         </clr-input-container>
                         <clr-input-container>
                             <label for="icon">Icon</label>
-                            <input clrInput type="text" formControlName="icon" id="icon" name="icon">
+                            <input clrInput type="text" formControlName="icon" id="icon" name="icon" [value]="accountHolder.icon">
                             <clr-control-helper>URL to an icon to use for this account</clr-control-helper>
                             <clr-control-error></clr-control-error>
                         </clr-input-container>
                         <clr-input-container>
                             <label for="siteUrl">Site URL</label>
-                            <input clrInput type="text" formControlName="siteUrl" id="siteUrl" name="siteUrl">
+                            <input clrInput type="text" formControlName="siteUrl" id="siteUrl" name="siteUrl" [value]="accountHolder.siteUrl">
                             <clr-control-helper>URL to the website for the account</clr-control-helper>
                             <clr-control-error></clr-control-error>
                         </clr-input-container>
                         <clr-input-container>
                             <label for="color">Color</label>
-                            <input clrInput type="text" formControlName="color" id="color" name="color">
+                            <input clrInput type="text" formControlName="color" id="color" name="color" [value]="accountHolder.color">
                             <clr-control-helper>HEX value for the background color of the control</clr-control-helper>
                             <clr-control-error></clr-control-error>
                         </clr-input-container>
                         <br />
-                        <button type="submit" [disabled]="accountForm.pristine">Save</button>
+                        <button type="submit" [disabled]="accountForm.pristine">{{accountHolder.key === '' ? 'Create' : 'Modify'}}</button>
                         <button type="reset" (click)="revert()">Reset</button>
 
                     </form>
