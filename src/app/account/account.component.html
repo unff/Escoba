@@ -4,7 +4,7 @@
         <div class="clr-col-12">
           {{account.name}}
           <span style="display:block; float: right;">
-            <a (click)="deleteAccount()">&times;</a>
+            <a (click)="deleteAccount()"><clr-icon _ngcontent-c2="" aria-hidden="true" shape="close"></clr-icon></a>
           </span>
         </div>
       </div>
@@ -16,7 +16,9 @@
             <img [src]="account.icon" class="card-media-image">
           </div>
           <div class="clr-col-8">
-            Bal: {{account.balance | currency:'USD'}}
+            <div class="clr-row">
+              Bal: {{account.balance | currency:'USD'}}
+            </div>
           </div>
         <!-- <div class="card-media-description">
           <span class="card-media-title">

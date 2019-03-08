@@ -15,7 +15,7 @@
     <div class="content-container">
       <main class="content-area">
         <div class="clr-row">
-            <div class="clr-col-4">
+            <div class="clr-col-3">
                 <div class="">
                     This is some text to see how wide this thing gets.  It's hard to tell how wide something will be or if it renders like you expect it to sometimes.
                     <!-- this will be ngFor (account of accounts) -->
@@ -25,7 +25,7 @@
                 </div>
 
             </div>
-            <div class="clr-col-8">
+            <div class="clr-col-9">
                     This is some text to see how wide this thing gets.  It's hard to tell how wide something will be or if it renders like you expect it to sometimes.
                 <!-- this will be ngFor (event of events)
                 <ul>
@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="clr-row">
-            <div class="clr-col-4">
+            <div class="clr-col-3">
                 <div class="bottomForm">
                     <form clrForm clrLayout="horizontal" [formGroup]="accountForm" (ngSubmit)="onSubmit()">
                         <input type="hidden" formControlName="key" name="key" [value]="accountHolder.key">
@@ -76,6 +76,7 @@
                     </form>
                 </div>
             </div>
+            <div class="clr-col-9"></div>
         </div>
       </main>
     </div>
