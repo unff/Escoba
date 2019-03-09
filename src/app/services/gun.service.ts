@@ -9,7 +9,7 @@ import { Transaction } from '../classes/transaction'
 })
 export class GunService implements OnDestroy {
 
-  readonly gun = Gun('http://localhost:8765/gun')
+  readonly gun = Gun()
 
   public accounts: Account[]
   public events: Event[]

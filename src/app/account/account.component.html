@@ -17,7 +17,14 @@
           </div>
           <div class="clr-col-8">
             <div class="clr-row">
-              Bal: {{account.balance | currency:'USD'}}
+              <div class="textholder" [hidden]="!editable" (click)="toggleEdit(); setEditFocus()">
+                Bal: {{account.balance | currency:'USD'}}
+              </div>
+              <div class="inputholder" [hidden]="editable">
+                <input type="text" #balEdit [(value)]="account.balance"
+                (focusout)="toggleEdit()">
+
+              </div>
             </div>
           </div>
         <!-- <div class="card-media-description">

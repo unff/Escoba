@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core'
 import { Account } from '../classes/account'
 
 @Component({
@@ -10,8 +10,21 @@ export class AccountComponent {
   @Input() account: Account
   @Output() delete = new EventEmitter<Account>()
   @Output() selectedAccount = new EventEmitter<Account>()
+  @ViewChild('balEdit') balEdit: ElementRef
+  editable: boolean
+  constructor() {this.editable = true}
 
-  constructor() { }
+  toggleEdit() {
+    // console.log(this.editable, ' -> ', !this.editable)
+    this.editable = !this.editable
+  }
+
+  setEditFocus() {
+    console.log('setting focus')
+    setTimeout(() => {
+      this.balEdit.nativeElement.focus()
+    }, 0)
+  }
 
   deleteAccount() {
       console.log('account component delete hit')
