@@ -10,6 +10,7 @@ export class AccountComponent {
   @Input() account: Account
   @Output() delete = new EventEmitter<Account>()
   @Output() selectedAccount = new EventEmitter<Account>()
+  @Output() update = new EventEmitter<Account>()
   @ViewChild('balEdit') balEdit: ElementRef
   editable: boolean
   constructor() {this.editable = true}
@@ -34,6 +35,10 @@ export class AccountComponent {
   accountClicked() {
     console.info('account was clicked')
     this.selectedAccount.emit(this.account)
+  }
+
+  updateBalance() {
+    this.update.emit(this.account)
   }
 
 }

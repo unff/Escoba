@@ -21,8 +21,8 @@
                 Bal: {{account.balance | currency:'USD'}}
               </div>
               <div class="inputholder" [hidden]="editable">
-                <input type="text" #balEdit [(value)]="account.balance"
-                (focusout)="toggleEdit()">
+                <input type="text" #balEdit [value]="account.balance"
+                (input)="account.balance = $event.target.value" (focusout)="updateBalance(); toggleEdit()">
 
               </div>
             </div>

@@ -101,6 +101,8 @@ export class GunService implements OnDestroy {
   }
 
   updateAccount(acct: Account) {
+    console.log('gun.updateAcccount', acct)
+    // this._accounts.get(acct.key).put(null)
     this._accounts.get(acct.key).put(acct)
     // update the account in the array.
   }
