@@ -20,6 +20,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - [x] fix account form. 'send' is poor wording. 'create' and/or 'modify' would be better
 - [ ] add bill tracking to this at some point.  See billtrack section below
 - [ ] Switch to firebase? Would that provide any better usage?
+- [x] throw away a nghts worth of code because the Account wouldnt pass correctly
 
 ## Box o' UX stuff
 
