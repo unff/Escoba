@@ -1,10 +1,10 @@
-  <div class="card" (click)="accountClicked()">
+  <div class="card">
     <div class="card-header">
       <div class="clr-row">
         <div class="clr-col-12">
           {{account.name}}
           <span style="display:block; float: right;">
-            <a (click)="deleteAccount()"><clr-icon _ngcontent-c2="" aria-hidden="true" shape="close"></clr-icon></a>
+            <a (click)="deleteAccount()"><clr-icon title="Delete account" aria-hidden="true" shape="close"></clr-icon></a>
           </span>
         </div>
       </div>
@@ -22,8 +22,18 @@
               </div>
               <div class="inputholder" [hidden]="editable">
                 <input type="text" #balEdit [value]="account.balance"
-                (input)="account.balance = $event.target.value" (focusout)="updateBalance(); toggleEdit()">
+                (input)="account.balance = $event.target.value" (focusout)="updateAccount(); toggleEdit()">
 
+              </div>
+            </div>
+            <div class="clr-row">
+              <div class="clr-col-6">
+                <input type="text" style="max-width:125%;" #payment id="baledit" placeholder="enter a payment">
+              </div>
+              <div class="clr-col-6">
+                <button class="btn btn-sm btn-icon" title="Log a payment for this account" (click)="processPayment()">
+                  <clr-icon shape="plus"></clr-icon>
+                </button>
               </div>
             </div>
           </div>
@@ -40,9 +50,11 @@
         ...
       </div> -->
     </div>
-    <div class="card-footer">
+    <div class="card-footer" style="padding-bottom:0px;">
       <a href="//{{account.siteUrl}}">
-        <button class="btn btn-sm btn-link">{{account.siteUrl}}</button>
+        <button class="btn btn-sm btn-link">{{account.siteUrl | slice:0:25}}</button>
       </a>
+      <clr-control-helper style="margin-top:0px;" (click)="accountClicked()">Click the balance to adjust it. </clr-control-helper>
+      <clr-control-helper style="margin-top:0px;" (click)="accountClicked()">Click here to edit account details</clr-control-helper>
     </div>
   </div>
