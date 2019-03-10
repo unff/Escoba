@@ -2,7 +2,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.1.
 
-## TODO
+It's a simple-ish app to track credit card accounts over time.
+
+Was a good practice project using Angular 7, Project Clarity, and GunDB.
+
+## Dev ToDo List
 
 - [x] rough out new account UI component
 - [x] rough out new event UI component (table seems to work fine)
@@ -16,8 +20,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - [x] clicking an account doesnt refresh the form data. fix?
 - [x] populating the form data from clicking and clicking Send makes a new account instead of modifying the existing. fix?
 - [x] fix account form. 'send' is poor wording. 'create' and/or 'modify' would be better
-- [ ] add bill tracking to this at some point.  See billtrack section below
-- [ ] Switch to firebase? Would that provide any better usage?
 - [x] throw away a nghts worth of code because the Account wouldnt pass correctly
 - [x] change click-to-edit behavior to a link in the footer.
 - [x] either hide the edit form or make it a modal until acct link clicked.
@@ -28,10 +30,16 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - [x] play with Fox
 - [x] remove focus on the balance when you press Enter
 - [x] editing balance creates a transaction
-- [ ] gunDB can't store non-string date objects. More fuel for firebase?
 - [x] add custom Transaction (note) modal for creating notes
-- [ ] custom Note transactions should be deletable and/or modifiable
 - [ ] transaction types should be color coded.
+
+## Future consideration
+
+- [ ] add bill tracking to this.  See billtrack section below
+- [ ] custom Note transactions should be deletable and/or modifiable
+- [ ] convert to Firebase
+- [ ] grocery list module addon
+- [ ] account reporting. Chart.js or something.
 
 ## Box o' UX stuff
 
@@ -56,4 +64,6 @@ So with balances over time, pin each change to the event that created it.
 
 ## Notes
 
-Thought I was passing Account objects into Gun.  Hoever, it turns out I was passing values (somehow?  not sure how?)  Gun ate itself on getters and setters when I tried to update.  Not sure if that was me, or if it was Gun, but removing the getters and setters cleared everything up, so yeah.  That's a thing that happens.
+Thought I was passing Account objects into Gun.  Hoever, it turns out I was passing values (somehow?  not sure how?)  Gun ate itself on getters and setters when I tried to update with an actual Account object.  Not sure if that was me, or if it was Gun, but removing the getters and setters cleared everything up, so yeah.  That's a thing that happens.
+
+GunDB also ate itself when trying to store a Date.
