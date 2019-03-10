@@ -6,6 +6,10 @@ It's a simple-ish app to track credit card accounts over time.
 
 Was a good practice project using Angular 7, Project Clarity, and GunDB.
 
+Install: clone and then `npm -i`
+
+Gun config:  localhost only by default.  add GunDB server to the project by including the server address in the Gun initializer in services/gun.service.ts:  `readonly gun = Gun('http://my.gun.server:port/gun)`
+
 ## Dev ToDo List
 
 - [x] rough out new account UI component
