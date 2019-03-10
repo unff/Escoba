@@ -12,13 +12,18 @@ import { Transaction } from './classes/transaction'
 export class AppComponent {
   title = 'escoba'
   showEditModal = false
+  showNoteModal = false
   accountForm: FormGroup
-  eventForm: FormGroup
+  noteForm: FormGroup
   accountHolder: Account
+  transactionHolder: Transaction
+  readonly emptyTransaction: Transaction = new Transaction('', '', '', '', '', 0, 0)
   readonly emptyAccount: Account = new Account('', '', 0, '', '', '')
   constructor(public db: GunService) {
     this.accountForm = this.createAccountFormGroup()
+    this.noteForm = this.createNoteFormGroup()
     this.accountHolder = this.emptyAccount
+    this.transactionHolder = this.emptyTransaction
     // this.eventForm = this.createEventFormGroup()
   }
 
@@ -33,16 +38,19 @@ export class AppComponent {
       })
   }
 
-  // createEventFormGroup() {
-  //     return new FormGroup({
-  //         type: new FormControl(),
-  //         note: new FormControl()
-  //     })
-  // }
+  createNoteFormGroup() {
+    return new FormGroup({
+      key: new FormControl(),
+      type: new FormControl(),
+      content: new FormControl()
+    })
+  }
 
   revert() {
     this.accountHolder = this.emptyAccount
+    this.transactionHolder = this.emptyTransaction
     this.accountForm.reset()
+    this.noteForm.reset()
   }
 
   onSubmit() {
@@ -57,9 +65,28 @@ export class AppComponent {
     this.showEditModal = false
   }
 
+  noteSubmit() {
+    const result: Transaction = Object.assign({}, this.noteForm.value)
+    if (!result.key) {
+      result.type = 'Note'
+      result.date = new Date(Date.now()).toISOString()
+      result.content = result.content.replace(/(\r\n|\n\r|\r|\n)/g, ' <br> ')
+      console.log('nSub', result)
+      this.addTransaction(result)
+    } else {
+      this.updateTransaction(result)
+    }
+    this.showNoteModal = false
+  }
+
   addNewAccount() {
     this.revert()
     this.showEditModal = true
+  }
+
+  addNewNote() {
+    this.revert()
+    this.showNoteModal = true
   }
 
   addAcccount(a: Account) {
@@ -75,9 +102,13 @@ export class AppComponent {
     this.db.updateAccount(a)
   }
 
-  processTransaction(t: Transaction) {
-    console.log('app.processTransaction', t)
+  addTransaction(t: Transaction) {
+    console.log('app.addTransaction', t)
     this.db.addTransaction(t)
+  }
+
+  updateTransaction(t: Transaction) {
+    this.db.updateTransaction(t)
   }
 
   selected(a: Account) {

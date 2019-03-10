@@ -36,7 +36,7 @@ export class GunService implements OnDestroy {
 
   loadAccounts() {
     this.accounts = []
-    this._accounts.map().on((data: any, key: any) => {
+    this._accounts.map().once((data: any, key: any) => {
       // console.info('account.on() fired for ', key)
       // see if key exists in accounts[] array, ignore null (deleted) nodes
       if (data !== null && this.accounts.find((e: any) => e.key === key) === undefined) {
@@ -50,14 +50,14 @@ export class GunService implements OnDestroy {
           data.color
         )
         this.accounts.push(account)
-        // console.log('account added: ', account, key)
+        console.log('account loaded: ', account, key)
       }
     })
   }
 
   loadTransactions() {
     this.transactions = []
-    this._transactions.map().on((data: any, key: any) => {
+    this._transactions.map().once((data: any, key: any) => {
       if (data !== null && this.transactions.find((t: any) => t.key === key) === undefined) {
         const transaction: Transaction = new Transaction(
           key,
@@ -85,11 +85,11 @@ export class GunService implements OnDestroy {
   }
 
   updateTransaction(t: Transaction) {
-
+    this._transactions.get(t.key).put(t)
   }
 
   deleteTransaction(t: Transaction) {
-
+    this._transactions.get(t.key).put(null)
   }
 
   addAccount(acct: Account) {

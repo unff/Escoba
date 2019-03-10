@@ -26,9 +26,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - [x] add payment subtracts from balance
 - [x] feed Fox
 - [x] play with Fox
-- [ ] editing balance creates a transaction
-- [ ] gunDB can't store date objects. More fuel for firebase?
-- [ ] add custom Transaction (note) modal for creating notes
+- [x] remove focus on the balance when you press Enter
+- [x] editing balance creates a transaction
+- [ ] gunDB can't store non-string date objects. More fuel for firebase?
+- [x] add custom Transaction (note) modal for creating notes
+- [ ] custom Note transactions should be deletable and/or modifiable
+- [ ] transaction types should be color coded.
 
 ## Box o' UX stuff
 

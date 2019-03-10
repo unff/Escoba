@@ -22,7 +22,7 @@
               </div>
               <div class="inputholder" [hidden]="editable">
                 <input type="text" #balEdit [value]="account.balance"
-                (input)="account.balance = $event.target.value" (focusout)="updateAccount(); toggleEdit()">
+                (input)="account.balance = $event.target.value" (keyup.enter)="handleKeyPress($event)" (focusout)="processAdjustment(); toggleEdit()">
 
               </div>
             </div>

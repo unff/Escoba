@@ -19,15 +19,20 @@
           <div class="">
             <!-- this will be ngFor (account of accounts) -->
               <esb-account *ngFor="let account of db.accounts" [account]="account" (update)="updateAccount($event)"
-                (selectedAccount)="selected($event)" (delete)="deleteAccount($event)" (changeMade)="processTransaction($event)"></esb-account>
+                (selectedAccount)="selected($event)" (delete)="deleteAccount($event)" (changeMade)="addTransaction($event)"></esb-account>
           </div>
           <button class="btn btn-block" (click)="addNewAccount()">Add a new account</button>
         </div>
         <div class="clr-col">
-          <h3>Transaction history</h3>
+          <div class="clr-row clr-align-items-end">
+            <div class="clr-col">
+              <h3 style="margin:0; display:inline-block;">Transaction history</h3>
+              <button style="margin:0 1em;" class="btn btn-sm" (click)="addNewNote()">Add a note</button>
+            </div>
+          </div>
           <hr>
           <table>
-            <tr *ngFor="let transaction of db.transactions" id="{{transaction.key}}"><td>{{transaction.content}}</td></tr>
+            <tr *ngFor="let transaction of db.transactions" id="{{transaction.key}}"><td style="padding-right: 2em;" [innerHTML]="transaction.content"> </td><td>{{transaction.date | date:'short'}}</td></tr>
           </table>
         </div>
       </div>
@@ -43,7 +48,7 @@
                 <clr-control-helper>The name of the account</clr-control-helper>
                 <clr-control-error></clr-control-error>
               </clr-input-container>
-              <clr-input-container [hidden]="true">
+              <clr-input-container [hidden]="accountHolder.key === '' ? false : true">
                 <label for="balance">Balance</label>
                 <input clrInput type="text" formControlName="balance" id="balance" name="balance"
                   [value]="accountHolder.balance">
@@ -77,6 +82,27 @@
 
             </form>
           </div>
+        </div>
+      </clr-modal>
+      <clr-modal [(clrModalOpen)]="showNoteModal">
+        <h3 class="modal-title">Add a Note</h3>
+        <div class="modal-body">
+            <form clrForm clrLayout="horizontal" [formGroup]="noteForm" (ngSubmit)="noteSubmit()">
+                <input type="hidden" formControlName="key" name="key" [value]="transactionHolder.key">
+                <input type="hidden" formControlName="type" name="type" [value]="transactionHolder.type">
+                <clr-textarea-container>
+                  <label>Note</label>
+                  <textarea clrTextarea formControlName="content" style="width:100%;" id="note" name="note" [value]="transactionHolder.content">
+                  </textarea> 
+                  <clr-control-helper>Add your note in the field above</clr-control-helper>
+                  <clr-control-error></clr-control-error>
+                </clr-textarea-container>
+                <br />
+                <button type="submit"
+                  [disabled]="noteForm.pristine">Add Note</button>
+                <button type="reset" (click)="revert()">Reset</button>
+  
+              </form>
         </div>
       </clr-modal>
     </main>

@@ -53,7 +53,7 @@ export class AccountComponent {
     const t: Transaction = new Transaction(
       '',
       type,
-      new Date(Date.now()).toString(),
+      new Date(Date.now()).toISOString(),
       content,
       this.account.key,
       adjustment,
@@ -63,15 +63,30 @@ export class AccountComponent {
     this.changeMade.emit(t)
   }
 
+  processAdjustment() {
+    const adjustment: number = this.account.balance - this.previousBalance
+    const fbal: string = new CurrencyPipe('en-US').transform(this.account.balance, 'USD', 'symbol', '1.2-2')
+    const fadj: string = new CurrencyPipe('en-US').transform(adjustment, 'USD', 'symbol', '1.2-2')
+    const content = `Adjustment of ${fadj} made to account ${this.account.name}.  New balance: ${fbal}`
+    this.updateAccount()
+    this.generateTransaction('Adjustment', adjustment, content)
+  }
+
   processPayment() {
     const pmt: number = this.payment.nativeElement.value
-    const fpmt = new CurrencyPipe('en-US').transform(pmt, 'USD', 'symbol', '1.0-2')
-    const fbal = new CurrencyPipe('en-US').transform(this.account.balance, 'USD', 'symbol', '1.0-2')
-    const content = `Payment of ${fpmt} made to account ${this.account.name}.<br />Previous balance: ${fbal}`
-    console.log('processPayment', pmt)
     this.account.balance = this.account.balance - pmt
+    const fpmt: string = new CurrencyPipe('en-US').transform(pmt, 'USD', 'symbol', '1.2-2')
+    const fbal: string = new CurrencyPipe('en-US').transform(this.account.balance, 'USD', 'symbol', '1.2-2')
+    const content = `Payment of ${fpmt} made to account ${this.account.name}.  New balance: ${fbal}`
     this.updateAccount()
     this.generateTransaction('Payment', pmt, content)
+  }
+
+  handleKeyPress(e: any) {
+    // if you press Enter, remove focus
+    if (e.keyCode === 13) {
+      e.srcElement.blur()
+    }
   }
 
 }
